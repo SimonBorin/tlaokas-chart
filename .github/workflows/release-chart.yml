@@ -1,0 +1,38 @@
+name: Release Helm Chart
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # Запуск по тегам типа v1.0.0
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v4
+        with:
+          version: v3.14.0
+
+      - name: Package chart
+        run: |
+          helm package chart
+          mkdir -p repo
+          mv tlaokas-*.tgz repo/
+
+      - name: Generate Helm repo index
+        run: |
+          cd repo
+          helm repo index . --url https://simonborin.github.io/tlaokas-chart/
+
+      - name: Push chart to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./repo
+          publish_branch: gh-pages
+          force_orphan: true
