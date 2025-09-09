@@ -3,7 +3,7 @@ name: Release Helm Chart
 on:
   push:
     tags:
-      - 'v*.*.*'  # Запуск по тегам типа v1.0.0
+      - 'v*.*.*'
 
 jobs:
   release:
@@ -20,7 +20,7 @@ jobs:
 
       - name: Package chart
         run: |
-          helm package chart
+          helm package ./
           mkdir -p repo
           mv tlaokas-*.tgz repo/
 
