@@ -1,0 +1,25 @@
+image:
+  backend:
+    repository: mrblooomberg/thelostartofkeepingasecret
+    tag: "latest"
+  frontend:
+    repository: mrblooomberg/thelostartofkeepingasecret-front
+    tag: "latest"
+
+ingress:
+  enabled: true
+  host: secretshare.pdx34.ops.ringcentral.com
+  certificateArn: arn:aws:acm:us-west-2:123456789012:certificate/abcde-1234-fghij-5678-klmnopqrstuv
+
+database:
+  host: secret-db.tlaokas.svc.cluster.local
+  port: 5432
+  name: secretdb
+  table: secrets
+
+backend:
+  secret:
+    name: tlaokas-db-credentials
+    key:
+      user: USERNAME
+      pass: PASSWORD

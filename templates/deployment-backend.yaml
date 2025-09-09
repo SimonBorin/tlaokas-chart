@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tlaokas-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tlaokas-backend
+  template:
+    metadata:
+      labels:
+        app: tlaokas-backend
+    spec:
+      containers:
+        - name: backend
+          image: "{{ .Values.image.backend.repository }}:{{ .Values.image.backend.tag }}"
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.backend.secret.name }}
+                  key: {{ .Values.backend.secret.key.user }}
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.backend.secret.name }}
+                  key: {{ .Values.backend.secret.key.pass }}
+            - name: DB_HOST
+              value: "{{ .Values.database.host }}"
+            - name: DB_PORT
+              value: "{{ .Values.database.port | quote }}"
+            - name: DB_NAME
+              value: "{{ .Values.database.name }}"
+            - name: DB_TABLE
+              value: "{{ .Values.database.table }}"

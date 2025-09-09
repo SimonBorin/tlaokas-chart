@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tlaokas-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tlaokas-frontend
+  template:
+    metadata:
+      labels:
+        app: tlaokas-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: "{{ .Values.image.frontend.repository }}:{{ .Values.image.frontend.tag }}"
+          ports:
+            - containerPort: 80
