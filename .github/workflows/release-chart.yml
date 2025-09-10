@@ -29,6 +29,14 @@ jobs:
           cd repo
           helm repo index . --url https://simonborin.github.io/tlaokas-chart/
 
+      - name: Make html index script executable
+        run: chmod +x .github/workflows/generate-index.sh
+
+      - name: Generate HTML index page
+        run: |
+          chmod +x .github/workflows/generate-index.sh
+          .github/workflows/generate-index.sh
+
       - name: Push chart to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
