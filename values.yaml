@@ -8,7 +8,7 @@ image:
 
 ingress:
   enabled: true
-  host: secretshare.pdx34.ops.ringcentral.com
+  host: secretshare.example.com
   certificateArn: arn:aws:acm:us-west-2:123456789012:certificate/abcde-1234-fghij-5678-klmnopqrstuv
 
 database:
