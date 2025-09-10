@@ -4,6 +4,10 @@ metadata:
   name: tlaokas-ingress
   annotations:
     alb.ingress.kubernetes.io/certificate-arn: "{{ .Values.ingress.certificateArn }}"
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'     # Включаем HTTPS + HTTP
+    alb.ingress.kubernetes.io/ssl-redirect: "443"                                # Редирект HTTP -> HTTPS
+    alb.ingress.kubernetes.io/scheme: internal                                   # Только внутри VPC
+    alb.ingress.kubernetes.io/target-type: ip
 spec:
   rules:
     - host: "{{ .Values.ingress.host }}"
