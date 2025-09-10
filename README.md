@@ -21,7 +21,7 @@ Secrets are deleted after the first view or 12 hours — whichever comes first.
 First, add this chart repo to Helm:
 
 ```bash
-helm repo add tlaokas https://your-gh-org.github.io/tlaokas-helm
+helm repo add tlaokas https://simonborin.github.io/tlaokas-chart
 helm repo update
 ```
 
