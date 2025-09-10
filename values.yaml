@@ -23,3 +23,19 @@ backend:
     key:
       user: USERNAME
       pass: PASSWORD
+  resources:
+    requests:
+      cpu: 10m
+      memory: 32Mi
+    limits:
+      cpu: 50m
+      memory: 64Mi
+
+frontend:
+  resources:
+    requests:
+      cpu: 5m
+      memory: 16Mi
+    limits:
+      cpu: 25m
+      memory: 32Mi

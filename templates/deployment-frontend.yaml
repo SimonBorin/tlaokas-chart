@@ -15,5 +15,7 @@ spec:
       containers:
         - name: frontend
           image: "{{ .Values.image.frontend.repository }}:{{ .Values.image.frontend.tag }}"
+          resources:
+            {{- toYaml .Values.frontend.resources | nindent 10 }}
           ports:
             - containerPort: 80
