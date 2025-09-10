@@ -16,7 +16,7 @@ spec:
         - name: backend
           image: "{{ .Values.image.backend.repository }}:{{ .Values.image.backend.tag }}"
           resources:
-            {{- toYaml .Values.backend.resources | nindent 10 }}
+            {{- toYaml .Values.backend.resources | nindent 12 }}
           ports:
             - containerPort: 8080
           env:
@@ -33,7 +33,7 @@ spec:
             - name: DB_HOST
               value: "{{ .Values.database.host }}"
             - name: DB_PORT
-              value: "{{ .Values.database.port | quote }}"
+              value: "{{ .Values.database.port }}"
             - name: DB_NAME
               value: "{{ .Values.database.name }}"
             - name: DB_TABLE
