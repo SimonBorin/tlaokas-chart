@@ -18,10 +18,13 @@ jobs:
         with:
           version: v3.14.0
 
+      - name: Clone gh-pages branch into repo/
+        run: |
+          git clone --branch gh-pages https://github.com/${{ github.repository }}.git repo || mkdir repo
+
       - name: Package chart
         run: |
           helm package ./
-          mkdir -p repo
           mv tlaokas-*.tgz repo/
 
       - name: Generate Helm repo index
@@ -29,10 +32,8 @@ jobs:
           cd repo
           helm repo index . --url https://simonborin.github.io/tlaokas-chart/
 
-      - name: Generate HTML index page
-        run: |
-          chmod +x .github/workflows/generate-index.sh
-          .github/workflows/generate-index.sh
+      - name: Copy static HTML index
+        run: cp index.html repo/index.html
 
       - name: Push chart to gh-pages
         uses: peaceiris/actions-gh-pages@v3
